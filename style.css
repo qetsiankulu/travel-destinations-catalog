@@ -2,51 +2,142 @@ html,
 body {
   margin: 0;
   padding: 0;
+  font-family: "Verdana";
 }
+
 
 .main-header {
-  background-color: rgba(0, 0, 0, 0.3);
-  padding-bottom: 10px;
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 20px;
+
 }
 
-.title {
-  text-align: center;
-  margin: 0;
-  font-size: 8em;
-  font-family: "Helvetica";
-  font-weight: normal;
+.logo { 
+  height: 7.5rem;
+}
+
+/** DESTINATION INPUT */
+.destination-input-group {
+  position: relative;
+  width: 100%;
+  max-width: 500px; /* adjust as needed */
+}
+
+.destination-input { 
+  padding: 20px; 
+  font-size: 16px; 
+  border-radius: 9999px;
+  width: 100%;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+} 
+
+.add-destination-btn {
+  position: absolute;
+  right: 8px;
+  top: 1.5rem;
+  transform: translateY(-50%);
+  padding: 8px 16px;
+  border: none;
+  background-color: #ff385c;
   color: white;
+  border-radius: 9999px;
+  font-size: 20px;
+  cursor: pointer;
 }
 
-#card-container {
+
+/** CONTINENTS FILTER */
+.continent-list { 
   display: flex;
   justify-content: center;
-  margin: 20px;
+  list-style: none;
+  padding: 0; 
+  gap: 10rem; 
+}
+
+.continent-item { 
+  display: flex; 
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  border-bottom: 2px solid transparent; /* avoids element's height changing on hover */
+  padding-bottom: 4px;                  /* avoids element's height changing on hover */
+}
+
+.continent-item:hover { 
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 4px; 
+}
+
+.continent-item.selected { 
+  border-bottom: 2px solid black;
+  padding-bottom: 4px; 
+
+}
+
+.continent-image { 
+  height: 3rem;
+  width: 100%;
+}
+
+.continent-text { 
+  color: #ccc;
+  font-size: 16px;
+}
+
+/** CARDS DISPLAY */
+#card-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 0px 20px;
 }
 
 .card {
-  width: 300px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 5px;
-}
-
-.card-content {
-  padding: 20px;
-  font-family: "Verdana";
-  color: #777;
-}
-
-.card-content h2 {
-  margin-top: 0;
-  font-size: 20px;
+  display: none; /* avoids showing an empty card */
 }
 
 .card img {
   width: 100%;
-  height: auto;
+  height: 300px;         /* Set a fixed height for the images */
+  border-radius: 12px;
+  object-fit: cover;
 }
+
+.card ul { 
+  padding: 0;
+  list-style: none;
+
+}
+
+.card-content {
+  padding: 5px;
+  color: #777;
+  flex-direction: column;
+  height: 100%;
+}
+
+.city-text { 
+  font-weight: bold;
+  color: black; 
+}
+
+
+
+
+
+
+
+
+
 
 .footer {
   display: flex;

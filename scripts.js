@@ -23,75 +23,155 @@
  *
  */
 
-const FRESH_PRINCE_URL =
-  "https://upload.wikimedia.org/wikipedia/en/3/33/Fresh_Prince_S1_DVD.jpg";
-const CURB_POSTER_URL =
-  "https://m.media-amazon.com/images/M/MV5BZDY1ZGM4OGItMWMyNS00MDAyLWE2Y2MtZTFhMTU0MGI5ZDFlXkEyXkFqcGdeQXVyMDc5ODIzMw@@._V1_FMjpg_UX1000_.jpg";
-const EAST_LOS_HIGH_POSTER_URL =
-  "https://static.wikia.nocookie.net/hulu/images/6/64/East_Los_High.jpg";
 
-// This is an array of strings (TV show titles)
-let titles = [
-  "Fresh Prince of Bel Air",
-  "Curb Your Enthusiasm",
-  "East Los High",
-];
-// Your final submission should have much more data than this, and
-// you should use more than just an array of strings to store it all.
+// JSON data for cities to be displayed
+const cities = [ 
+  { 
+      "city": "Gorée", 
+      "country": "Senegal", 
+      "continent": "Africa", 
+      "image": "https://lp-cms-production.imgix.net/2023-03/500pxRF_42366822.jpg?auto=format,compress&q=72&fit=crop.jpg"
+  }, 
+  {
+      "city": "Cancún",
+      "country": "Mexico",
+      "continent": "North America",
+      "image": "https://www.rutasyrutinas.com/wp-content/uploads/2019/10/hotel-cancun-fiesta-americana11.jpg"
+  }, 
+  {
+      "city": "Bangkok",
+      "country": "Thailand",
+      "continent": "Asia",
+      "image": "https://linkstravelandtours.co.uk/wp-content/uploads/2018/12/bangkok-temple-dawn-thailand.jpg"
+  }, 
+  {
+      "city": "Salvador",
+      "country": "Brazil",
+      "continent": "South America",
+      "image": "https://lp-cms-production.imgix.net/2022-08/iStock-1322713774.jpg"
+  }
+
+]
+
+// This function creates a new city 
+function createCity() { 
+  const input = document.getElementById("destination"); // get the destination info from input field 
+  const value = input.value.trim()                      // remove extra whitespace (e.g. "Tokyo, Japan, Asia")
+
+  const parts = value.split(",");  // Array ["Tokyo", "Japan", "Asia"]
+
+
+  const [city, country, continent] = parts; // use object destructing to retrieve data from user input
+
+  const newCity = { 
+    city, 
+    country, 
+    continent, 
+    image: "https://i0.wp.com/port2flavors.com/wp-content/uploads/2022/07/placeholder-614.png?fit=1200%2C800&ssl=1.jpg"
+  }; 
+
+  // Add to cities array
+  cities.push(newCity); 
+
+  // Re-render cards
+  showCards(); 
+
+  // Clear the input
+  input.value = ""; 
+}
 
 // This function adds cards the page to display the data in the array
 function showCards() {
-  const cardContainer = document.getElementById("card-container");
-  cardContainer.innerHTML = "";
-  const templateCard = document.querySelector(".card");
+  const cardContainer = document.getElementById("card-container"); // select the container
+  const templateCard = document.querySelector(".card");            // select the template card
 
-  for (let i = 0; i < titles.length; i++) {
-    let title = titles[i];
+  cardContainer.innerHTML = "";   // clear the container 
 
-    // This part of the code doesn't scale very well! After you add your
-    // own data, you'll need to do something totally different here.
-    let imageURL = "";
-    if (i == 0) {
-      imageURL = FRESH_PRINCE_URL;
-    } else if (i == 1) {
-      imageURL = CURB_POSTER_URL;
-    } else if (i == 2) {
-      imageURL = EAST_LOS_HIGH_POSTER_URL;
-    }
-
-    const nextCard = templateCard.cloneNode(true); // Copy the template card
-    editCardContent(nextCard, title, imageURL); // Edit title and image
-    cardContainer.appendChild(nextCard); // Add new card to the container
-  }
+  // loop through the cities array
+  // for each city: 
+  //  (1) clone the template card 
+  //  (2) update the cloned card with city info 
+  //  (3) append updated card to the container 
+  cities.forEach(city => { 
+    const newCard = templateCard.cloneNode(true);     // Copy the template card 
+    editCardContent(newCard, city);               // edit image and text content 
+    cardContainer.appendChild(newCard);             // Add the new card to the container 
+  });
 }
 
-function editCardContent(card, newTitle, newImageURL) {
+// This function manages the states (hover, click, etc) of the continent filter
+function handleContinentStates() { 
+  // an array of all the `continent-items`
+  const continentItems = document.querySelectorAll('.continent-item'); 
+
+  continentItems.forEach(item => { 
+    const img = item.querySelector('.continent-image'); // get the image element
+    const text = item.querySelector('.continent-text'); // get the text element
+
+    // Event listener for when the item is being hovered
+    item.addEventListener('mouseenter', () => { 
+      if (!item.classList.contains('selected')) {        // check if the item 
+        img.src = img.getAttribute('data-hover');        // change the image source
+        text.style.color = '#000';                      // change the color 
+      }
+    });
+
+    // Event listener for when the item is not being hovered anymore
+    item.addEventListener('mouseleave', () => { 
+      if (!item.classList.contains('selected')) { 
+        img.src = img.getAttribute('data-default'); // revert back to the original image source
+        text.style.color = '#ccc';                  // revert back to the original color
+      }
+    }); 
+
+    // Event listener for when an item is clicked
+    item.addEventListener('click', () => { 
+      item.classList.toggle('selected');       // toggle the "selected" class on the `continent-item` when its clicked 
+      
+      // if "selected" is toggled on, keep the styling from the hover state
+      // else, revert back to the default styling 
+      if (item.classList.contains('selected')) { 
+        img.src = img.getAttribute('data-hover');       
+        text.style.color = '#000';                      
+       } else { 
+          img.src = img.getAttribute('data-default'); 
+          text.style.color = '#ccc';                    
+      }
+    });
+  });
+
+
+}
+
+// This function updates the card info
+function editCardContent(card, city) {
   card.style.display = "block";
 
-  const cardHeader = card.querySelector("h2");
-  cardHeader.textContent = newTitle;
+  const img = card.querySelector("img"); // get the image
+  const ul = card.querySelector("ul");   // get the contents of the card
 
-  const cardImage = card.querySelector("img");
-  cardImage.src = newImageURL;
-  cardImage.alt = newTitle + " Poster";
+  // Update the image 
+  img.src = city.image; 
+  img.alt = `${city.city}, ${city.country}` // use string interpolation to create the contents of the `alt` tag 
 
-  // You can use console.log to help you debug!
-  // View the output by right clicking on your website,
-  // select "Inspect", then click on the "Console" tab
-  console.log("new card:", newTitle, "- html: ", card);
+  // Update the text 
+  ul.innerHTML = `
+  <li class="city-text">${city.city}</li> 
+  <li>${city.country}</li> 
+  <li>${city.continent}</li> 
+  `; 
+
+  // console.log for debugging
+  console.log("new card:", city.city, "- html: ", card);
 }
+// When the page is first loaded, 
+//  (1) Handle the states for the Continent filter 
+//  (2) Show the cards for each city
+//  (3) Create a new city is the add button is clicked 
+document.addEventListener("DOMContentLoaded", () => { 
+  handleContinentStates(); 
+  showCards(); 
+  const addButton = document.querySelector('.add-destination-btn'); 
+  addButton.addEventListener('click', createCity)
+}); 
 
-// This calls the addCards() function when the page is first loaded
-document.addEventListener("DOMContentLoaded", showCards);
-
-function quoteAlert() {
-  console.log("Button Clicked!");
-  alert(
-    "I guess I can kiss heaven goodbye, because it got to be a sin to look this good!"
-  );
-}
-
-function removeLastCard() {
-  titles.pop(); // Remove last item in titles array
-  showCards(); // Call showCards again to refresh
-}

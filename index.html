@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>LA TV Shows | Home</title>
+    <title> Qetsia's Dream Travel Destinations| Home</title>
     <meta name="description" content="A Catalog of Shows Set in Los Angeles" />
     <link rel="stylesheet" href="style.css" />
     <script type="text/javascript" src="scripts.js"></script>
@@ -9,23 +9,99 @@
 
   <body>
     <header class="main-header">
-      <h1 class="title">LA TV Shows</h1>
+      <div> 
+        <img class="logo" src="/travel-destinations-catalog/images/Qetsia-Nkulu-logo.svg" alt="Qetsia's Logo"> 
+      </div>
+      <div class="destination-input-group">
+        <input class="destination-input" type="text" id="destination" name="destination" placeholder="e.g. Tokyo, Japan, Asia">
+        <button class="add-destination-btn">+</button>
+      </div>
     </header>
-    <div id="card-container"></div>
-    <div class="card" style="display: none">
-      <div class="card-content">
-        <h2>TV Show Title</h2>
-        <img src="" alt="TV Show Poster" />
-        <ul>
-          <li>Bullet Point 1</li>
-          <li>Bullet Point 2</li>
-          <li>Bullet Point 3</li>
+    <main> 
+      <div class="continents-filter">
+        <ul class="continent-list">
+        
+          <li class="continent-item">
+            <img 
+              class="continent-image" 
+              src="/travel-destinations-catalog/images/africa-icon.svg" 
+              data-hover="/travel-destinations-catalog/images/africa-icon-hover.svg"
+              data-default="/travel-destinations-catalog/images/africa-icon.svg" 
+              alt="Africa"
+              >
+            <span class="continent-text">Africa</span>
+          </li>
+
+          <li class="continent-item">
+            <img 
+              class="continent-image" 
+              src="/travel-destinations-catalog/images/asia-icon.svg" 
+              data-hover="/travel-destinations-catalog/images/asia-icon-hover.svg"
+              data-default="/travel-destinations-catalog/images/asia-icon.svg" 
+              alt="Asia"
+              >
+            <span class="continent-text">Asia</span>
+          </li>
+
+          <li class="continent-item">
+            <img 
+              class="continent-image" 
+              src="/travel-destinations-catalog/images/europe-icon.svg" 
+              data-hover="/travel-destinations-catalog/images/europe-icon-hover.svg"
+              data-default="/travel-destinations-catalog/images/europe-icon.svg" 
+              alt="Europe"
+              >
+            <span class="continent-text">Europe</span>
+          </li>
+
+          <li class="continent-item">
+            <img 
+              class="continent-image" 
+              src="/travel-destinations-catalog/images/north-america-icon.svg" 
+              data-hover="/travel-destinations-catalog/images/north-america-icon-hover.svg"
+              data-default="/travel-destinations-catalog/images/north-america-icon.svg" 
+              alt="North America"
+              >
+            <span class="continent-text">North America</span>
+          </li>
+
+          <li class="continent-item">
+            <img 
+              class="continent-image" 
+              src="/travel-destinations-catalog/images/south-america-icon.svg" 
+              data-hover="/travel-destinations-catalog/images/south-america-icon-hover.svg"
+              data-default="/travel-destinations-catalog/images/south-america-icon.svg" 
+              alt="South America"
+              >
+            <span class="continent-text">South America</span>
+          </li>
+
+          <li class="continent-item">
+            <img 
+              class="continent-image" 
+              src="/travel-destinations-catalog/images/oceania-icon.svg" 
+              data-hover="/travel-destinations-catalog/images/oceania-icon-hover.svg"
+              data-default="/travel-destinations-catalog/images/oceania-icon.svg" 
+              alt="Oceania"
+              >
+            <span class="continent-text">Oceania</span>
+          </li>
         </ul>
       </div>
-    </div>
-    <div class="footer">
-      <button onclick="quoteAlert();">Get A Quote!</button>
-      <button onclick="removeLastCard();">Remove A Card!</button>
-    </div>
+
+      <div id="card-container">
+        <div class="card">
+          <div class="card-content">
+            <img src="" alt="" />
+            <ul>
+              <li>City</li>
+              <li>Country</li>
+              <li>Continent</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+
   </body>
 </html>
