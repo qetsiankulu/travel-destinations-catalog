@@ -102,7 +102,22 @@ body {
 
 .card {
   margin: 5px;
-  display: none; /* avoids showing an empty card */
+  position: relative;
+}
+
+.card-delete-btn { 
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: #ff385c;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease;
+
 }
 
 .card img {
