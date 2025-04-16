@@ -188,7 +188,7 @@ function showCards() {
         cities.splice(originalIndex, 1) // Remove the city from the original `cities` array
       }
 
-      showCards(getFilteredCities());   // Re-render the cards with updated list
+      showCards();   // Re-render the cards with updated list
     }); 
 
     cardContainer.appendChild(newCard); // Add the new card to the container 
