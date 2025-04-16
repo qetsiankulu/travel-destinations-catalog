@@ -2,7 +2,7 @@
 
 Submitted by: **Qetsia Nkulu**
 
-**Dream Travel Destinations** is a simple catalog webpage that shows various travel destinations that I would like to visit one day. 
+A simple catalog webpage that shows various travel destinations that I would like to visit one day. 
 The UI is inpsired by the [Airbnb](https://www.airbnb.com/) homepage.
 
 Time spent: **10+** hours spent in total
